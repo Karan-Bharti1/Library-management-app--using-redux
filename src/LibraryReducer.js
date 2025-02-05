@@ -10,7 +10,7 @@ switch(action.type){
         }
         case REMOVE_BOOKS:
             return {
-            ...state,books:books.filter(book=>book.ISBN===action.payload)
+            ...state,books:state.books.filter(book=>book.ISBN!=action.payload)
         }
         case CALCULATE_TOTAL:
             return{

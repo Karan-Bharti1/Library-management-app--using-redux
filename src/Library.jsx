@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addBook, calculateTotal } from "./actions"
+import { addBook, calculateTotal, removeBook } from "./actions"
 
 const Library=()=>{
     const [book,setBook]=useState({
@@ -21,7 +21,11 @@ const addBookHandler=()=>{
         dispatch(calculateTotal())
     }
 }
-const displayBooks=books.map(book=><li key={book.ISBN}>{book.title} by {book.author}(ISBN:{book.ISBN})</li>)
+const removeHandler=(ISBN)=>{
+    dispatch(removeBook(ISBN))
+    dispatch(calculateTotal())
+}
+const displayBooks=books.map(book=><li key={book.ISBN}>{book.title} by {book.author}(ISBN:{book.ISBN}) <button onClick={()=>removeHandler(book.ISBN)}>Remove</button></li>)
 return(
     <>
     <h1>Library Management</h1>
